@@ -99,3 +99,8 @@ body {
 	background-color: #9186F6;
 }
 
+.btn:disabled:hover {
+	cursor: initial;
+	background-color: #A79DFF;
+}
+
