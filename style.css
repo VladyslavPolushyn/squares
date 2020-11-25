@@ -1,0 +1,21 @@
+.main-header {
+	padding: 20px 0;
+	margin-bottom: 10px;
+}
+
+.game-field, .result-field {
+	height: 400px;
+	border: 1px solid #000;
+}
+
+.square {
+	width: 20px;
+	height: 20px;
+	background-color: gray;
+	border: 1px solid blue;
+	box-sizing: border-box;
+}
+
+
+
+
