@@ -12,8 +12,15 @@ let squaresArr = document.querySelectorAll('.square');
 
 startBtn.onclick = playGame;
 
+let timer;
+let seconds = 60;
 
 function playGame() {
+
+	timer = setInterval(function() {
+    tick();
+  }, 1000);
+
 	let score = 0;
 	points.innerHTML = score;
 	startBtn.classList.toggle('hidden');
@@ -23,10 +30,20 @@ function playGame() {
 	squaresArr[randomInteger(0, numberOfSquares-1)].classList.toggle('invisible');
 
 	for (let square of squaresArr) {
+
 		square.onclick = function () {
+
 			score++;
 			points.innerHTML = score;
-			square.classList.toggle('invisible');
+
+			hideSquares();
+			
+			for (let i = 0; i < randomInteger(1, 3); i++) {
+
+				squaresArr[randomInteger(0, numberOfSquares-1)].classList.toggle('invisible');
+
+			}
+
 		}
 	}
 
@@ -36,4 +53,32 @@ function playGame() {
 function randomInteger(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
+}
+
+function tick() {
+	
+	if (seconds < 60) {
+		if (seconds < 10) {
+			timeLeft.innerHTML = '00:0' + seconds;
+		}else {
+			timeLeft.innerHTML = '00:' + seconds;
+		}
+	}
+
+	if (seconds > 0) {
+		seconds--;
+	} else {
+		clearInterval(timer);
+		hideSquares();
+		
+	}
+
+}
+
+function hideSquares() {
+	for (let visibleSquare of squaresArr) {
+		if (!visibleSquare.classList.contains('invisible')) {
+			visibleSquare.classList.toggle('invisible');
+		}
+	}
 }
