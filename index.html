@@ -11,24 +11,27 @@
 	<header class="main-header">
 		<div class="container">
 			<h1>Clear The Squares</h1>
-			<div class="control">
-				<button id="startBtn" class="">start</button>
-				<button id="newGameBtn" class="">new game</button>
-				<button id="pauseBtn" class="">pause</button>
-				<button id="resumeBtn" class="">resume</button>
+			<div class="controller">
+				<div class="control">
+					<button id="startBtn" class="">start</button>
+					<button id="newGameBtn" class="">new game</button>
+					<button id="pauseBtn" class="hidden">pause</button>
+					<button id="resumeBtn" class="hidden">resume</button>
+				</div>
+				<div class="info">
+					<p class="">
+						Points: <span id="points">35</span>
+					</p>
+					<p class="">
+						Time left: <span id="timeLeft">01:00</span>
+					</p>
+				</div>
 			</div>
-			<div class="info">
-				<p class="">
-					Points: <span id="points">35</span>
-				</p>
-				<p class="">
-					Time left: <span id="timeLeft">01:00</span>
-				</p>
-			</div>
+			
 		</div>
 	</header>
 
-	<main>
+	<main class="play-field">
 		<div class="container">
 			<div class="game-field">
 				
