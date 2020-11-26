@@ -24,7 +24,7 @@ let score;
 let timer;
 
 function playGame() {
-	seconds = 59;
+	seconds = 7;
 	score = 0;
 	timer = setInterval(function() {
 		tick();
@@ -145,6 +145,7 @@ function resultName() {
 		popUp.classList.add('hidden');
 	})
 	return;
+}
 
 function clickableSquare(value) {
 	if (value) {
@@ -158,7 +159,7 @@ function clickableSquare(value) {
 	}
 }
 
-function randomInteger(min, max) {
-  let rand = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
-}
+// function randomInteger(min, max) {
+//   let rand = min + Math.random() * (max + 1 - min);
+//   return Math.floor(rand);
+// }
