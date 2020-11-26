@@ -1,20 +1,20 @@
 const gameField = document.querySelector('.game-field');
-
 let squareSize = 40; //don't forget to change the .square styles
-
 let numberOfSquares = Math.floor(gameField.offsetWidth / squareSize) * Math.floor(gameField.offsetHeight / squareSize);
-
+// Fill in gameField
 for (let i = 0; i < numberOfSquares; i++) {
 	gameField.insertAdjacentHTML('afterBegin', `<div class='square invisible'></div>`);
 }
-
+// Array of squares
 let squaresArr = document.querySelectorAll('.square');
 
 startBtn.onclick = playGame;
+pauseBtn.onclick = pause;
+resumeBtn.onclick = resume;
 
-let timer;
 let seconds;
 let score;
+let timer;
 
 function playGame() {
 	seconds = 59;
@@ -46,7 +46,7 @@ function playGame() {
 				if (currentSquare.classList.contains('invisible')) {
 					currentSquare.classList.toggle('invisible');
 				}
-				
+
 			}
 
 		}
@@ -54,13 +54,8 @@ function playGame() {
 
 }
 
-function randomInteger(min, max) {
-  let rand = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
-}
 
 function tick() {
-	
 	if (seconds < 60) {
 		if (seconds < 10) {
 			timeLeft.innerHTML = '00:0' + seconds;
@@ -74,9 +69,25 @@ function tick() {
 	} else {
 		clearInterval(timer);
 		hideSquares();
-		
 	}
+}
 
+function pause() {
+	pauseBtn.classList.toggle('hidden');
+	resumeBtn.classList.toggle('hidden');
+	clearInterval(timer);
+	clickableSquare(false);
+}
+
+function resume() {
+	
+	timer = setInterval(function() {
+		tick();
+	}, 1000);
+
+	clickableSquare(true);
+	pauseBtn.classList.toggle('hidden');
+	resumeBtn.classList.toggle('hidden');
 }
 
 function hideSquares() {
@@ -88,11 +99,30 @@ function hideSquares() {
 }
 
 function newGame() {
+	clickableSquare(true);
 	clearInterval(timer);
 	timeLeft.innerHTML = '01:00';
 	points.innerHTML = '';
-	startBtn.classList.toggle('hidden');
-	pauseBtn.classList.toggle('hidden');
+	startBtn.classList.remove('hidden');
+	pauseBtn.classList.add('hidden');
+	resumeBtn.classList.add('hidden');
 	hideSquares();
 	newGameBtn.disabled = true;
+}
+
+function clickableSquare(value) {
+	if (value) {
+		for (let square of squaresArr) {
+			square.classList.remove('no-click');
+		}
+	} else {
+		for (let square of squaresArr) {
+			square.classList.add('no-click');
+		}
+	}
+}
+
+function randomInteger(min, max) {
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
 }

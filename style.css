@@ -104,3 +104,6 @@ body {
 	background-color: #A79DFF;
 }
 
+.no-click {
+	pointer-events: none;
+}
