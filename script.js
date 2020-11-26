@@ -13,19 +13,21 @@ let squaresArr = document.querySelectorAll('.square');
 startBtn.onclick = playGame;
 
 let timer;
-let seconds = 60;
+let seconds;
+let score;
 
 function playGame() {
-
+	seconds = 59;
+	score = 0;
 	timer = setInterval(function() {
-    tick();
-  }, 1000);
+		tick();
+	}, 1000);
 
-	let score = 0;
 	points.innerHTML = score;
 	startBtn.classList.toggle('hidden');
 	pauseBtn.classList.toggle('hidden');
 	newGameBtn.disabled = false;
+	newGameBtn.onclick = newGame;
 
 	squaresArr[randomInteger(0, numberOfSquares-1)].classList.toggle('invisible');
 
@@ -48,7 +50,6 @@ function playGame() {
 	}
 
 }
-
 
 function randomInteger(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
@@ -81,4 +82,14 @@ function hideSquares() {
 			visibleSquare.classList.toggle('invisible');
 		}
 	}
+}
+
+function newGame() {
+	clearInterval(timer);
+	timeLeft.innerHTML = '01:00';
+	points.innerHTML = '';
+	startBtn.classList.toggle('hidden');
+	pauseBtn.classList.toggle('hidden');
+	hideSquares();
+	newGameBtn.disabled = true;
 }
