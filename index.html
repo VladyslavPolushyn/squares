@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Clear The Squares</title>
 	<link rel="stylesheet" href="style.css">
+	<script src="script.js" defer></script>
 </head>
 <body>
 	
@@ -36,15 +37,15 @@
 			<div class="game-field">
 				
 			</div>
-			<div class="result-field">
+			<div class="result-field" id="result-field">
 				<h3>Result:</h3>
 			</div>
 		</div>
 	</main>
 
-	<div class="windowFinish hidden">
+	<div class="windowFinish hidden" id="popUp">
 		<div class="finish ">
-			<p>Your score:</p>
+			<p>Your score: <span id="scoreNumber"></span></p>
 			<label for="">Name:
 				<input type="text" class="input">
 			</label>
@@ -52,7 +53,5 @@
 		</div>
 	</div>
 	
-
-	<script src="script.js"></script>
 </body>
 </html>
