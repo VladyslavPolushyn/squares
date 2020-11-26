@@ -42,8 +42,11 @@ function playGame() {
 			
 			for (let i = 0; i < randomInteger(1, 3); i++) {
 
-				squaresArr[randomInteger(0, numberOfSquares-1)].classList.toggle('invisible');
-
+				let currentSquare = squaresArr[randomInteger(0, numberOfSquares-1)];
+				if (currentSquare.classList.contains('invisible')) {
+					currentSquare.classList.toggle('invisible');
+				}
+				
 			}
 
 		}
