@@ -149,6 +149,7 @@ body {
 	padding-right: 125px;
 }
 .finish .input {
+	padding-left: 10px;
 	height: 25px;
 	border-radius: 3px;
 }
