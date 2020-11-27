@@ -140,7 +140,6 @@ function closeWindow() {
 function resultName() {
 	saveButton.addEventListener('click', () => {
 		timeLeft.innerHTML = '01:00';
-		points.innerHTML = '';
 		pauseBtn.disabled = false;
 		pauseBtn.classList.add('hidden');
 		startBtn.classList.remove('hidden');
