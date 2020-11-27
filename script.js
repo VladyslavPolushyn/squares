@@ -8,10 +8,12 @@ let resultField = document.getElementById('result-field');
 let uniqueId = [];
 let squareSize = 40; //don't forget to change the .square styles
 let numberOfSquares = Math.floor(gameField.offsetWidth / squareSize) * Math.floor(gameField.offsetHeight / squareSize);
+
 // Fill in gameField
 for (let i = 0; i < numberOfSquares; i++) {
 	gameField.insertAdjacentHTML('afterBegin', `<div class='square invisible'></div>`);
 }
+
 // Array of squares
 let squaresArr = document.querySelectorAll('.square');
 
@@ -33,6 +35,7 @@ function playGame() {
 	points.innerHTML = score;
 	startBtn.classList.toggle('hidden');
 	pauseBtn.classList.toggle('hidden');
+	pauseBtn.disabled = false;
 	newGameBtn.disabled = false;
 	newGameBtn.onclick = newGame;
 
@@ -58,10 +61,10 @@ function playGame() {
 
 		}
 	}
-
 }
 
 resultName();
+
 
 function randomInteger(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
@@ -135,10 +138,32 @@ function popUpWindow() {
 
 function closeWindow() {
 	popUp.classList.add('hidden');
+
 }
 
 function resultName() {
 	saveButton.addEventListener('click', () => {
+
+		let line = document.createElement('p');
+
+		let name = document.createElement('span');
+		let score = document.createElement('span');
+
+		name.classList.add('name-result');
+		score.classList.add('score-result');
+
+		name.textContent = input.value;
+		score.textContent = ' ' + points.innerHTML;
+
+		line.appendChild(name);
+		line.appendChild(score);
+
+		resultField.appendChild(line);
+		popUp.classList.add('hidden');
+		input.value = '';
+		
+		pauseBtn.disabled = true;
+
 		timeLeft.innerHTML = '01:00';
 		pauseBtn.disabled = false;
 		pauseBtn.classList.add('hidden');
@@ -162,8 +187,10 @@ function resultName() {
 
 		}
 
+
 	})
 	return;
+
 }
 
 function clickableSquare(value) {
@@ -177,3 +204,4 @@ function clickableSquare(value) {
 		}
 	}
 }
+
