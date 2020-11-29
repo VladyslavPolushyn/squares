@@ -61,11 +61,13 @@ body {
 	border-bottom: 4px double black;
 }
 .result-field p {
+	position: relative;
 	display: flex;
-	justify-content: space-around;
-	padding-bottom: 5px;
+    justify-content: flex-start;
+    padding: 0 20px 10px 50px;
 }
 .name-result {
+	width: 50%;
 }
 .score-result {
 	position: relative;
@@ -181,4 +183,45 @@ body {
 	width: 100px;
 	height: 30px;
 	border-radius: 10px;
+}
+
+
+.result-field p:nth-child(1)::before {
+	position: absolute;
+	top: 0;
+	left: 10px;
+	content: 'I';
+	width: 20px;
+	height: 20px;
+	border: 1px solid rgb(218, 186, 4);
+	background-color: gold;
+	color: brown;
+	border-radius: 50%;
+	text-align: center;
+}
+.result-field p:nth-child(2)::before {
+	position: absolute;
+	top: 0;
+	left: 10px;
+	content: 'II';
+	width: 20px;
+	height: 20px;
+	border: 1px solid rgb(209, 209, 209);
+	background-color: rgb(168, 168, 168);
+	color: rgb(61, 61, 61);
+	border-radius: 50%;
+	text-align: center;
+}
+.result-field p:nth-child(3)::before {
+	position: absolute;
+	top: 0;
+	left: 10px;
+	content: 'III';
+	width: 20px;
+	height: 20px;
+	border: 1px solid rgb(114, 98, 28);
+	background-color: rgb(218, 138, 33);
+	color: rgb(128, 7, 7);
+	border-radius: 50%;
+	text-align: center;
 }

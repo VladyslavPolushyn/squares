@@ -9,6 +9,13 @@ let uniqueId = [];
 let squareSize = 40; //don't forget to change the .square styles
 let numberOfSquares = Math.floor(gameField.offsetWidth / squareSize) * Math.floor(gameField.offsetHeight / squareSize);
 
+let records = JSON.parse(localStorage.getItem('records'));
+if (!Array.isArray(records)) {
+	records = [];
+}
+// display records list
+renderScores();
+
 // Fill in gameField
 for (let i = 0; i < numberOfSquares; i++) {
 	gameField.insertAdjacentHTML('afterBegin', `<div class='square invisible'></div>`);
@@ -143,25 +150,8 @@ function closeWindow() {
 
 function resultName() {
 	saveButton.addEventListener('click', () => {
-
-		let line = document.createElement('p');
-
-		let name = document.createElement('span');
-		let score = document.createElement('span');
-
-		name.classList.add('name-result');
-		score.classList.add('score-result');
-
-		name.textContent = input.value;
-		score.textContent = ' ' + points.innerHTML;
-
-		line.appendChild(name);
-		line.appendChild(score);
-
-		resultField.appendChild(line);
+		let recordName = input.value.trim();
 		popUp.classList.add('hidden');
-		input.value = '';
-		
 		pauseBtn.disabled = true;
 
 		timeLeft.innerHTML = '01:00';
@@ -169,25 +159,27 @@ function resultName() {
 		pauseBtn.classList.add('hidden');
 		startBtn.classList.remove('hidden');
 
-		uniqueId.push(uniqueId.length+1);
-		let currentId = uniqueId.length-1
+		if (recordName !== '') {
+			const record = {
+				name: recordName,
+				score: points.innerHTML,
+				time: new Date()
+			};
+			records.push(record);
+			// sort by score
+			records.sort((recordA, recordB) => {
+				const scoreA = parseInt(recordA.score);
+				const scoreB = parseInt(recordB.score);
+				return scoreB - scoreA;
+			})
+			localStorage.setItem('records', JSON.stringify(records));
 
-		if (input.value.replace(/\s/g,"") !== ""){
-
-			localStorage.setItem(currentId, input.value + ': ' + points.innerHTML + ' points');
-
-			let line = document.createElement('p');
-			for (let i=0; i<localStorage.length; i++) {
-			  let key = localStorage.key(i);
-			  line.innerHTML = `${localStorage.getItem(key)}`;
-			}
-			resultField.appendChild(line);
+			renderScores();
 
 			popUp.classList.add('hidden');
-
 		}
 
-
+		input.value = '';
 	})
 	return;
 
@@ -205,3 +197,29 @@ function clickableSquare(value) {
 	}
 }
 
+function createRecordLine(recordName, recordScore) {
+	const line = document.createElement('p');
+	const name = document.createElement('span');
+	const score = document.createElement('span');
+
+	name.classList.add('name-result');
+	score.classList.add('score-result');
+
+	name.textContent = recordName;
+	score.textContent = ` ${recordScore} ${recordScore === '1' ? 'point' : 'points'}`;
+	// if (recordScore === '1') {
+	// 	score.textContent = ' ' + recordScore + ' point';
+	// }
+	// score.textContent = ' ' + recordScore + ' points';
+
+	line.appendChild(name);
+	line.appendChild(score);
+	return line;
+}
+
+function renderScores() {
+	resultField.innerHTML = '';
+	records.forEach(element => {	
+		resultField.appendChild(createRecordLine(element.name, element.score));
+	});
+}
